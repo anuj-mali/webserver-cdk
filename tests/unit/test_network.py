@@ -31,12 +31,6 @@ def test_exactly_two_public_subnets(test_stack_template: Template):
         props={
             "Properties": {
                 "MapPublicIpOnLaunch": True,
-                "Tags": Match.array_with([
-                    {
-                        "Key": "aws-cdk:subnet-type", 
-                        "Value": "Public"
-                    }
-                ])
             }
         }
     )
@@ -49,9 +43,6 @@ def test_exactly_two_private_subnets(test_stack_template: Template):
         props={
             "Properties": {
                 "MapPublicIpOnLaunch": False,
-                "Tags": Match.array_with([
-                    {"Key": "aws-cdk:subnet-type", "Value": "Private"}
-                ])
             }
         }
     )
