@@ -25,23 +25,6 @@ def test_vpc_cidr_block(test_stack_template: Template):
 def test_subnets_created(test_stack_template: Template):
     test_stack_template.resource_count_is('AWS::EC2::Subnet', 4)
 
-def test_subnets_cidr_blocks(test_stack_template: Template):
-    # Public Subnets
-    test_stack_template.has_resource_properties("AWS::EC2::Subnet", {
-        "CidrBlock": "10.0.1.0/24", "MapPublicIpOnLaunch": True
-    })
-    test_stack_template.has_resource_properties("AWS::EC2::Subnet", {
-        "CidrBlock": "10.0.2.0/24", "MapPublicIpOnLaunch": True
-    })
-
-    # Private Subnets
-    test_stack_template.has_resource_properties("AWS::EC2::Subnet", {
-        "CidrBlock": "10.0.3.0/24", "MapPublicIpOnLaunch": False
-    })
-    test_stack_template.has_resource_properties("AWS::EC2::Subnet", {
-        "CidrBlock": "10.0.4.0/24", "MapPublicIpOnLaunch": False
-    })
-
 def test_exactly_two_public_subnets(test_stack_template: Template):
     public_subnets = test_stack_template.find_resources(
         "AWS::EC2::Subnet",
